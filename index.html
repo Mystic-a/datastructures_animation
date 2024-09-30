@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVL Tree Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <h1>AVL Tree Visualizer</h1>
+        <div>
+            <input type="number" id="valueInput" placeholder="Enter a value">
+            <button onclick="insertValue()">Insert</button>
+            <button onclick="deleteValue()">Delete</button>
+            <button onclick="traverseTree('inorder')">In-order Traversal</button>
+            <button onclick="traverseTree('preorder')">Pre-order Traversal</button>
+            <button onclick="traverseTree('postorder')">Post-order Traversal</button>
+        </div>
+        <div id="output"></div>
+        <canvas id="treeCanvas" width="800" height="600"></canvas>
+        <div id="errorMessage" class="error"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

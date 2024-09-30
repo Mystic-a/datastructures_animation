@@ -1,0 +1,18 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(to right, #0fce38, #feb47b);
+  color: white;
+  padding: 20px;
+}
+
+#treeCanvas {
+  border: 1px solid black;
+  margin-top: 20px;
+  background-color: rgba(250, 226, 216, 0.685);
+}
+
+.error {
+  color: red;
+  margin-top: 20px;
+}

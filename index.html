@@ -3,25 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVL Tree Visualizer</title>
+    <title>Popover Example</title>  
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="background"></div>
+    <h1 class="a"> AVL TREE VISUALIZER</h1>
+    <p class="first"> Step through each scene one by one to uncover the magic of the AVL tree. Use headphones for better experience.</p>
+
     <div class="container">
-        <h1>AVL Tree Visualizer</h1>
-        <div>
-            <input type="number" id="valueInput" placeholder="Enter a value">
-            <button onclick="insertValue()">Insert</button>
-            <button onclick="deleteValue()">Delete</button>
-            <button onclick="traverseTree('inorder')">In-order Traversal</button>
-            <button onclick="traverseTree('preorder')">Pre-order Traversal</button>
-            <button onclick="traverseTree('postorder')">Post-order Traversal</button>
+        <button class="popover-button" data-scene="1"> Let the journey begin  -  Scene 1  </button>
+        <button class="popover-button" data-scene="2">Scene 2</button>
+        <button class="popover-button" data-scene="3">Scene 3</button>
+        <button class="popover-button" data-scene="4">Scene 4</button>
+        <button class="popover-button" data-scene="5">Help balance the AVL tree - Insertion</button>
+        <button class="popover-button" data-scene="6">Scene 5</button>
+        <button class="popover-button" data-scene="7">Help restore the balance - Deletion</button>
+        <button class="popover-button" data-scene="8">Scene 6  -  The Ending</button>
+        
+        <div id="popover" class="popover">
+            <span class="close-btn">&times;</span>
+            <div class="popover-content" id="popover-content"></div>
         </div>
-        <div id="output"></div>
-        <canvas id="treeCanvas" width="800" height="600"></canvas>
-        <div id="errorMessage" class="error"></div>
     </div>
+    <h1 class="b"> For Your Understanding:Example AVL tree code</h1>
+    <pre>
+<span class="keyword">#include</span> <span class="function">&lt;iostream&gt;</span>
+<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="function">std</span>;
+
+<span class="comment">// An AVL tree node</span>
+<span class="keyword">class</span> <span class="function">Node</span> {
+<span class="keyword">public</span>:
+    <span class="keyword">int</span> key;
+    Node *left;
+    Node *right;
+    <span class="keyword">int</span> height;
+
+    Node(<span class="keyword">int</span> k) {
+        key = k;
+        left = NULL;
+        right = NULL;
+        height = 1;
+    }
+};
+
+<span class="comment">// A utility function to get the height of the tree</span>
+<span class="keyword">int</span> <span class="function">height</span>(Node *N) {
+    <span class="keyword">if</span> (N == NULL)
+        <span class="keyword">return</span> 0;
+    <span class="keyword">return</span> N->height;
+}
+
+<span class="comment">// A utility function to right rotate subtree rooted with y</span>
+Node* <span class="function">rightRotate</span>(Node *y) {
+    Node *x = y->left;
+    Node *T2 = x->right;
+
+    <span class="comment">// Perform rotation</span>
+    x->right = y;
+    y->left = T2;
+
+    <span class="comment">// Update heights</span>
+    y->height = <span class="function">height</span>(y->left) +
+                <span class="function">height</span>(y->right) + 1;
+    x->height = <span class="function">height</span>(x->left) +
+                <span class="function">height</span>(x->right) + 1;
+
+    <span class="comment">// Return new root</span>
+    <span class="keyword">return</span> x;
+}
+
+<span class="comment">// A utility function to left rotate subtree rooted with x</span>
+Node* <span class="function">leftRotate</span>(Node *x) {
+    Node *y = x->right;
+    Node *T2 = y->left;
+
+    <span class="comment">// Perform rotation</span>
+    y->left = x;
+    x->right = T2;
+
+    <span class="comment">// Update heights</span>
+    x->height = <span class="function">height</span>(x->left) +
+                <span class="function">height</span>(x->right) + 1;
+    y->height = <span class="function">height</span>(y->left) +
+                <span class="function">height</span>(y->right) + 1;
+
+    <span class="comment">// Return new root</span>
+    <span class="keyword">return</span> y;
+}
+
+<span class="comment">// Get Balance factor of node N</span>
+<span class="keyword">int</span> <span class="function">getBalance</span>(Node *N) {
+    <span class="keyword">if</span> (N == NULL)
+        <span class="keyword">return</span> 0;
+    <span class="keyword">return</span> <span class="function">height</span>(N->left) - <span class="function">height</span>(N->right);
+}
+
+<span class="keyword">int</span> <span class="function">maximum</span>(<span class="keyword">int</span> h1, <span class="keyword">int</span> h2) {
+    <span class="keyword">return</span> (h1 > h2) ? h1 : h2;
+}
+
+<span class="keyword">Node*</span> <span class="function">insert</span>(Node* node, <span class="keyword">int</span> key) {
+    <span class="comment">// 1. Perform the normal BST rotation</span>
+    <span class="keyword">if</span> (node == NULL)
+        <span class="keyword">return</span> <span class="keyword">new</span> Node(key);
+
+    <span class="keyword">if</span> (key < node->key)
+        node->left = <span class="function">insert</span>(node->left, key);
+    <span class="keyword">else</span> <span class="keyword">if</span> (key > node->key)
+        node->right = <span class="function">insert</span>(node->right, key);
+    <span class="keyword">else</span>
+        <span class="keyword">return</span> node;
+
+    <span class="comment">// 2. Update height of this ancestor node</span>
+    node->height = <span class="function">maximum</span>(<span class="function">height</span>(node->left), <span class="function">height</span>(node->right)) + 1;
+
+    <span class="comment">// 3. Get the balance factor of this ancestor node</span>
+    <span class="keyword">int</span> balance = <span class="function">getBalance</span>(node);
+
+    <span class="comment">// 4. Balance the tree</span>
+    <span class="comment">// Left Left Case</span>
+    <span class="keyword">if</span> (balance > 1 && key < node->left->key)
+        <span class="keyword">return</span> <span class="function">rightRotate</span>(node);
+
+    <span class="comment">// Right Right Case</span>
+    <span class="keyword">if</span> (balance < -1 && key > node->right->key)
+        <span class="keyword">return</span> <span class="function">leftRotate</span>(node);
+
+    <span class="comment">// Left Right Case</span>
+    <span class="keyword">if</span> (balance > 1 && key > node->left->key) {
+        node->left = <span class="function">leftRotate</span>(node->left);
+        <span class="keyword">return</span> <span class="function">rightRotate</span>(node);
+    }
+
+    <span class="comment">// Right Left Case</span>
+    <span class="keyword">if</span> (balance < -1 && key < node->right->key) {
+        node->right = <span class="function">rightRotate</span>(node->right);
+        <span class="keyword">return</span> <span class="function">leftRotate</span>(node);
+    }
+
+    <span class="keyword">return</span> node;
+}
+
+<span class="comment">// A utility function to print inorder traversal of the tree</span>
+<span class="keyword">void</span> <span class="function">inOrder</span>(Node *root) {
+    <span class="keyword">if</span> (root != NULL) {
+        <span class="function">inOrder</span>(root->left);
+        <span class="function">cout</span> << root->key << "  ";
+        <span class="function">inOrder</span>(root->right);
+    }
+}
+
+<span class="comment">// Driver Code</span>
+<span class="keyword">int</span> <span class="function">main</span>() {
+    Node *root = NULL;
+
+    <span class="comment">// Constructing AVL tree</span>
+    root = <span class="function">insert</span>(root, 9);
+    root = <span class="function">insert</span>(root, 5);
+    root = <span class="function">insert</span>(root, 10);
+    root = <span class="function">insert</span>(root, 0);
+    root = <span class="function">insert</span>(root, 6);
+    root = <span class="function">insert</span>(root, 11);
+    root = <span class="function">insert</span>(root, -1);
+    root = <span class="function">insert</span>(root, 1);
+    root = <span class="function">insert</span>(root, 2);
+
+    <span class="function">cout</span> << "Inorder traversal of the AVL tree is:" << <span class="function">endl</span>;
+    <span class="function">inOrder</span>(root);
+
+    <span class="keyword">return</span> 0;
+}
+    </pre>
+    
     <script src="script.js"></script>
 </body>
 </html>
+
+

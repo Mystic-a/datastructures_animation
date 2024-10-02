@@ -1,18 +1,176 @@
 body {
-  font-family: Arial, sans-serif;
+  background-image: url('avlbackground.jpeg');
+  background-size:contain; /* Change this value to any of the options above */
+}
+  
+
+.a {
+  font-size: 48px;
+  color: #ffffff; /* White color for text */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  font-weight: bold; /* Correctly closed property */
+  letter-spacing: 2px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: center;
-  background: linear-gradient(to right, #0fce38, #feb47b);
-  color: white;
-  padding: 20px;
+}
+.b {
+  font-size: 25px;
+  color: #ffffff; /* White color for text */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  font-weight: bold; /* Correctly closed property */
+  letter-spacing: 2px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  font-style: italic;
 }
 
-#treeCanvas {
-  border: 1px solid black;
-  margin-top: 20px;
-  background-color: rgba(250, 226, 216, 0.685);
+
+
+/* Style for the paragraph */
+.first {
+font-size: 20px;
+color: #ffffff;
+margin-bottom: 40px;
+font-style: italic;
+font-family:Georgia, 'Times New Roman', Times, serif;
+text-align: center;
+background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+padding: 10px; /* Padding inside the background */
+border-radius: 10px; 
+}
+.second{
+font-size: 13px;
+color: #ffffff;
+margin-bottom: 40px;
+font-style: italic;
+font-family:cursive;
+text-align: center;
+background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+padding: 10px; /* Padding inside the background */
+border-radius: 10px; 
+line-height: 1.5;
+
 }
 
-.error {
-  color: red;
-  margin-top: 20px;
+.container {
+
+max-width: 900px;
+margin: auto;
+position: relative; /* Ensure the container is the reference for absolute positioning */
+height: 100vh; /* Full height of the viewport */
+display: flex; /* Use Flexbox */
+flex-direction: column; /* Arrange items in a column */
+justify-content: center; /* Center items vertically */
+align-items: center; /* Center items horizontally */
 }
+
+.popover-button {
+position: relative; /* Use absolute positioning */
+top: -100px;
+padding: 15px;
+margin: 5px;
+background-color: #230916;
+color: white;
+border: none;
+border-radius: 25px;
+cursor: pointer;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+transition: background-color 0.3s, transform 0.3s;
+font-family:Georgia, 'Times New Roman', Times, serif;
+
+
+}
+
+.popover-button:hover {
+background-color: #ffcf30;
+transform: scale(1.05);
+}
+
+.popover {
+
+display: none;
+position: absolute;
+background: white;
+border: 1px solid #ccc;
+border-radius: 15px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+padding: 15px;
+z-index: 1000;
+
+width: 800px;
+top: 50%;
+left: 50%;
+transform: translate(-70%, -30%);
+
+}
+
+@keyframes fadeIn {
+from {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
+}
+
+.close-btn {
+cursor: pointer;
+float: right;
+font-size: 40px;
+color: #22181d;
+transition: color 0.3s;
+position: absolute;
+top: 10px;
+right: 15px;
+z-index: 1001;
+}
+
+.close-btn:hover {
+color: #000000;
+transform: scale(1.50);
+}
+
+.popover-content {
+max-width: 300px;
+font-size: 16px;
+line-height: 1.5;
+}
+pre {
+  background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 14px;
+            line-height: 1.5;
+            border: 1px solid #444;
+            width:700px;
+            transform:translate(35%, 0%);
+}
+.keyword {
+  color: #66d9ef;
+}
+.function {
+  color: #a6e22e;
+}
+.comment {
+  color: #75715e;
+  font-style: italic;
+}
+.number {
+  color: #ae81ff;
+}
+.operator {
+  color: #f92672;
+}
+
+
+
+
